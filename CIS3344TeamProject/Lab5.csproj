@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="homeSvc.asmx" />
+    <Content Include="lab5_style.css" />
     <Content Include="packages.config" />
+    <Content Include="RealEstate.html" />
     <Content Include="Utilities\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache" />
     <Content Include="Utilities\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
