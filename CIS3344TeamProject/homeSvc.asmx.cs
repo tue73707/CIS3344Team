@@ -97,5 +97,57 @@ namespace CIS3344TeamProject
 
             return homeList;
         }
+
+        [WebMethod]
+        public Boolean AddHome(Home home)
+        {
+            //DBConnect objDB = new DBConnect();
+
+            string strSQL = "INSERT INTO Home (Address, City, State, ZipCode, Bed, Bath, Price, Size, Status, Description, URL)" + 
+                " VALUES ('" + home.address + "','" + home.city + "','" + home.state + "','" + home.zipcode + 
+                "','" + home.bed + "','" + home.bath + "','" + home.price + "','" + home.size + "','" + 
+                home.status + "','" + home.description + "','" + home.url + "')";
+
+            int result = objDB.DoUpdate(strSQL);
+
+            if (result > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        [WebMethod]
+        public Home GetHome(int mlsNum)
+        {
+            DBConnect objDB = new DBConnect();
+            Home home = new Home();
+
+            string strSQL = "SELECT * FROM Home WHERE MLS = '" + mlsNum + "'";
+
+            int recordCount = 0;
+
+            objDB.GetDataSet(strSQL, out recordCount);
+
+            if (recordCount > 0)
+            {
+                home.address = objDB.GetField("Address", 0).ToString();
+                home.city = objDB.GetField("City", 0).ToString();
+                home.state = objDB.GetField("State", 0).ToString();
+                home.zipcode = objDB.GetField("ZipCode", 0).ToString();
+                home.bed = Convert.ToInt32(objDB.GetField("Bed", 0).ToString());
+                home.bath = Convert.ToInt32(objDB.GetField("Bath", 0).ToString());
+                home.price = Convert.ToInt32(objDB.GetField("Price", 0).ToString());
+                home.size = Convert.ToInt32(objDB.GetField("Size", 0).ToString());
+                home.status = objDB.GetField("Status", 0).ToString();
+                home.description = objDB.GetField("Description", 0).ToString();
+                home.url = objDB.GetField("URL", 0).ToString();
+            }
+            return home;
+        }
+
     }
 }

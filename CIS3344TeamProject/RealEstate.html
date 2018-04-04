@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Real Estate</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     <link href="lab5_style.css" rel="stylesheet" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,9 @@
 
     <div class="display"></div>
 
-    <br /><br /><br />
+    <br />
+    <br />
+    <br />
 
 
     <script>
@@ -37,34 +39,53 @@
 
                 // Clear the divs contents.
                 $(".display").html("");
-                $(".display").html("Street Address: " + "<input id='txtStreet' type='text' />" + "<br /><br />" +
+                $(".display").html("Street Address: " + "<input id='txtAddress' type='text' />" + "<br /><br />" +
                     "City: " + "<input id='txtCity' type='text' />" + "<br /><br />" +
                     "State: " + "<input id='txtState' type='text' />" + "<br /><br />" +
-                    "Zip Code: " + "<input id='txtZip' type='text' />" + "<br /><br />" +
+                    "Zip Code: " + "<input id='txtZipCode' type='text' />" + "<br /><br />" +
 
-                    "Description: " + "<textarea id='txtDescription' cols='30' rows='3'></textarea>" + "<br /><br />" +
                     "Number of bed: " + "<input id='txtBed' type='text' />" + "<br /><br />" +
                     "Number of bath: " + "<input id='txtBath' type='text' />" + "<br /><br />" +
                     "Price: " + "<input id='txtPrice' type='text' />" + "<br /><br />" +
-                    "Sq ft  : " + "<input id='txtSize' type='text' />" + "<br /><br />" +
-                    "Status: " + "<select id='Select1'>" + "<option>Active</option><option>Processing</option>" +
-                    "</select>" + "<br /><br />" +
+                    "Sq ft: " + "<input id='txtSize' type='text' />" + "<br /><br />" +
 
+                    "Status: " + "<input id='status' type='text' />" + "<br /><br />" +
+                    //"Status: " + "<select id='status'>" + "<option>Active</option><option>Processing</option>" +
+                    //"</select>" + "<br /><br />" +
+
+                    "Description: " + "<textarea id='txtDescription' cols='30' rows='3'></textarea>" + "<br /><br />" +
                     "Image URL: " + "<input id='txtURL' type='text' />" + "<br /><br />" +
 
-                    "<input id='btnSubmit' type='submit' value='Submit' />" 
+                    "<input id='btnSubmit' type='submit' value='Submit' />");
 
+                $("#btnSubmit").click(function () {
+                    var strURL = "homeSvc.asmx/AddHome";
+                    //$(".display").html("");
 
+                    var home = new Object();
+                    home.Address = $("#txtAddress").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.Zip = $("#txtZipCode").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#status").val();                    home.Des = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                                        //AJAX                    $.ajax({
+                        type: "POST",
+                        url: strURL,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: strInput,
+                        success: function (data) {
+                            alert("Got here!");
+                            var result = data.d;
+                            if (result == "true") {
+                                $(".display").text("The home was successfully added to the database.");
+                            }
+                            else {
+                                $(".display").text("The home was not added to the database. Try it later.");
+                            }
+                        },
+                        error: function (req, status, error) {
+                            alert("Error: " + req.responseText + " | " + status + " | " + error);
+                        }
+                    });//end AJAX
+                });//end add home
+            });//end display add
 
-
-                    );
-            });
-
-
-
-            $("#btnSearch").click(function () {
-
-            });
 
 
         });
