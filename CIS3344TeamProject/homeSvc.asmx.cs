@@ -27,9 +27,9 @@ namespace CIS3344TeamProject
         // This method receives a maximum price of a home and returns a Home object with the field values from the database.
         // This method returns an ArrayList of Home objects that represents all the home with a given max price.
         [WebMethod]
-        public ArrayList GetHomeByMaxPrice(int price)
+        public List<Home> GetHomeByMaxPrice(int price)
         {
-            ArrayList homeList = new ArrayList();
+            List<Home> homeList = new List<Home>();
             DBConnect objDB = new DBConnect();
             String strSQL = "SELECT * FROM Home WHERE Price <='" + price + "'";
             int count = 0;
@@ -64,9 +64,9 @@ namespace CIS3344TeamProject
         // This method receives number of bed & bath for a home and returns a Home object with the field values from the database.
         // This method returns an ArrayList of Home objects that represents all the homes with a given number of bed & bath.
         [WebMethod]
-        public ArrayList GetHomeByBedAndBath(int bed, int bath)
+        public List<Home> GetHomeByBedAndBath(int bed, int bath)
         {
-            ArrayList homeList = new ArrayList();
+            List<Home> homeList = new List<Home>();
             DBConnect objDB = new DBConnect();
             String strSQL = "SELECT * FROM Home WHERE Bed ='" + bed + "', Bath ='" + bath +"'";
             int count = 0;
