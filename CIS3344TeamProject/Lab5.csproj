@@ -66,7 +66,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="homeSvc.asmx" />
     <Content Include="packages.config" />
+    <Content Include="Utilities\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache" />
+    <Content Include="Utilities\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Utilities\obj\Release\Utilities.csprojResolveAssemblyReference.cache" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,10 +80,42 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Utilities\bin\Debug\Utilities.dll" />
+    <Content Include="Utilities\bin\Debug\Utilities.pdb" />
+    <Content Include="Utilities\bin\Release\Utilities.dll" />
+    <Content Include="Utilities\bin\Release\Utilities.pdb" />
+    <Content Include="Utilities\obj\Debug\Utilities.csproj.FileListAbsolute.txt" />
+    <Content Include="Utilities\obj\Debug\Utilities.dll" />
+    <Content Include="Utilities\obj\Debug\Utilities.pdb" />
+    <Content Include="Utilities\obj\Release\Utilities.csproj.FileListAbsolute.txt" />
+    <Content Include="Utilities\obj\Release\Utilities.dll" />
+    <Content Include="Utilities\obj\Release\Utilities.pdb" />
+    <Content Include="Utilities\Utilities.csproj" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Home.cs" />
+    <Compile Include="homeSvc.asmx.cs">
+      <DependentUpon>homeSvc.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Connection.cs" />
+    <Compile Include="Utilities\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Utilities\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Utilities\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Utilities\obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Utilities\obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Utilities\obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Utilities\Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Validators.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\obj\Debug\TempPE\" />
+    <Folder Include="Utilities\obj\Release\TempPE\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,25 @@
+F:\CIS3342-Projects\CIS3342-Solution\Utilities\bin\Debug\Utilities.dll
+F:\CIS3342-Projects\CIS3342-Solution\Utilities\bin\Debug\Utilities.pdb
+F:\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+F:\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.dll
+F:\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.pdb
+C:\Users\shado\Desktop\CIS3342-Projects\CIS3342-Solution\Utilities\bin\Debug\Utilities.dll
+C:\Users\shado\Desktop\CIS3342-Projects\CIS3342-Solution\Utilities\bin\Debug\Utilities.pdb
+C:\Users\shado\Desktop\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+C:\Users\shado\Desktop\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.dll
+C:\Users\shado\Desktop\CIS3342-Projects\CIS3342-Solution\Utilities\obj\Debug\Utilities.pdb
+C:\Users\shado\Desktop\CIS3342-Projects v.2\CIS3342-Solution\Utilities\bin\Debug\Utilities.dll
+C:\Users\shado\Desktop\CIS3342-Projects v.2\CIS3342-Solution\Utilities\bin\Debug\Utilities.pdb
+C:\Users\shado\Desktop\CIS3342-Projects v.2\CIS3342-Solution\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+C:\Users\shado\Desktop\CIS3342-Projects v.2\CIS3342-Solution\Utilities\obj\Debug\Utilities.dll
+C:\Users\shado\Desktop\CIS3342-Projects v.2\CIS3342-Solution\Utilities\obj\Debug\Utilities.pdb
+F:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\bin\Debug\Utilities.dll
+F:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\bin\Debug\Utilities.pdb
+F:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+F:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.dll
+F:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.pdb
+E:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\bin\Debug\Utilities.dll
+E:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\bin\Debug\Utilities.pdb
+E:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.csprojResolveAssemblyReference.cache
+E:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.dll
+E:\CIS3342-Projects\CIS3342\CIS3342-Solution\Utilities\obj\Debug\Utilities.pdb
