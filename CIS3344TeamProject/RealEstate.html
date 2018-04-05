@@ -24,26 +24,66 @@
 
     <input id="btnAdd" type="button" value="Add" />
 
-    <input id="btnSearch" type="button" value="Search" />
+    <!--<input id="btnSearch" type="button" value="Search" />-->
+
+
+
+    <div id="displaySearch">
+        <table>
+            <tr>
+                <td>Maximum Price: $
+                    <input id="txtMaxPrice" type="text" /></td>
+                <td colspan="4">
+                    <input id="btnSearchByPrice" value="Search" type="button" />
+                </td>
+
+            </tr>
+        </table>
+        <h3>OR</h3>
+        <table>
+            <tr>
+                <td>Bed: #
+                    <input id="txtNumBed" type="text" /></td>
+
+
+                <td>Bath: #
+                    <input id="txtNumBath" type="text" /></td>
+                <td colspan="4">
+                    <input id="btnSearchByBedAndBath" value="Search" type="button" /></td>
+            </tr>
+
+        </table>
+        <h3>OR</h3>
+
+        <table>
+            <tr>
+                <td>MLS: #
+                    <input id="txtMLS" type="text" /></td>
+                <td colspan="4">
+                    <input id="btnSearchMLS" value="Search For MLS" type="button" /></td>
+            </tr>
+            <tr>
+                <td>Status: 
+                    <input id="txtUpdateStatus" type="text" /></td>
+
+                <td>
+                    <input id="btnUpdateStatus" value="Update Status" type="button" /></td>
+
+            </tr>
+
+        </table>
+    </div>
 
     <div class="display"></div>
 
-<!--    <center>
-        <table>
-        <tr>
-            <td>Price: </td>
-            <td><input id="txtMaxPrice" type="text" /></td>
-        </tr>
-        <tr>
-        <tr>
-            <td colspan="2">
-                <input id="btnSearchByPrice" value="Search By Price" type="button" />
-            </td>
-        </tr>
-    </table>
-</center-->
 
-    <br /><br /><br />
+
+
+
+
+    <br />
+    <br />
+    <br />
 
 
     <script>
@@ -52,9 +92,9 @@
             $("#btnAdd").click(function () {
 
                 // Clear the divs contents.
-                $(".display").html("");
+                $("#displaySearch").html("");
 
-                $(".display").html("Street Address: " + "<input id='txtStreet' type='text' />" + "<br /><br />" +
+                $("#displaySearch").html("Street Address: " + "<input id='txtStreet' type='text' />" + "<br /><br />" +
                     "City: " + "<input id='txtCity' type='text' />" + "<br /><br />" +
                     "State: " + "<input id='txtState' type='text' />" + "<br /><br />" +
                     "Zip Code: " + "<input id='txtZip' type='text' />" + "<br /><br />" +
@@ -77,7 +117,27 @@
                     //$(".display").html("");
 
                     var home = new Object();
-                    home.Address = $("#txtStreet").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.ZipCode = $("#txtZip").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#txtStatus").val();                    home.Description = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                    //AJAX                    $.ajax({
+                    home.Address = $("#txtStreet").val();
+                    home.City = $("#txtCity").val();
+                    home.State = $("#txtState").val();
+                    home.ZipCode = $("#txtZip").val();
+                    home.Bed = $("#txtBed").val();
+                    home.Bath = $("#txtBath").val();
+                    home.Price = $("#txtPrice").val();
+                    home.Size = $("#txtSize").val();
+                    //$('#aioConceptName').find(":selected").text();
+                    //home.Status = $("#status").find(":selected").text();
+                    home.Status = $("#txtStatus").val();
+                    home.Description = $("#txtDescription").val();
+                    home.URL = $("#txtURL").val();
+
+                    var inputParametersObject = new Object();
+                    inputParametersObject.home = home;
+
+                    var strInput = JSON.stringify(inputParametersObject);
+
+                    //AJAX
+                    $.ajax({
                         type: "POST",
                         url: strURL,
                         contentType: "application/json; charset=utf-8",
@@ -100,158 +160,179 @@
 
             });
 
-            $("#btnSearch").click(function () {
 
-                // Clear the divs contents.
+
+
+
+            //    );
+
+            $("#btnUpdateStatus").click(function () {
+                var strURL = "homeSvc.asmx/UpdateStatus";
                 $(".display").html("");
 
-                $(".display").html("Maximum Price: $" + "<input id='txtMaxPrice' type='text' />" + "<br /><br />" +
-               
-                    "<input id='btnSearchByPrice' type='button' value='Search' />" + "<hr>" +
-                    
-                    "Bed: #" + "<input id='txtNumBed' type='text' />" +"       Bath: # " + "<input id='txtNumBath' type='text' />" + "<br /><br />"+
+                var mlsNum = parseInt($("#txtMLS").val());
+                var status = $("#txtUpdateStatus").val();
+                var strInput = JSON.stringify({ mlsNum: mlsNum, status: status });
 
-                    "<input id='btnSearchByBedAndBath' type='button' value='Search' />" +
-
-                    "<br /><br />" + 
-
-                    "MLS: " + "<input id='txtMLS' type='text' />" + "<br /><br />" +
-
-                    "Status: " + "<input id='txtUpdateStatus' type='text' />" + "<br /><br />" +
-                    "<input id='btnUpdateStatus' type='submit' value='Update Status' />" +
-
-                    "<input id='btnSearchMLS' type='submit' value='Search For MLS' />"
-
-
-
-
-                    );
-
-                $("#btnUpdateStatus").click(function () {
-                    var strURL = "homeSvc.asmx/UpdateStatus";
-                    //$(".display").html("");
-
-                    var mlsNum = parseInt($("#txtMLS").val());
-                    var status = $("#txtUpdateStatus").val();
-                    var strInput = JSON.stringify({ mlsNum: mlsNum, status: status });
-
-                    $.ajax({
-                        type: "POST",
-                        url: strURL,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: strInput,
-                        success: function (data) {
-                            var home = data.d;
-                            alert("data: " + home.address);
-                            $(".display").html("<br><br>" +
-                                            "Home: <br>" +
-                                            home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
-                                            "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                                            "Bath: " + home.bath +
-                                            "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                                            "Size: " + home.size +
-                                            "<br>Status: " + home.status +
-                                            "<br><br>Description:<br>" + home.description + "<br><br>" +
-                                            " <img src='" + home.url + "'/>");
-                        },
-                        error: function (req, status, error) {
-                            alert("Error: " + req.responseText + " | " + status + " | " + error);
-                        }
-                    });//end AJAX                });
-
-
-                $("#btnSearchMLS").click(function () {
-                    var strURL = "homeSvc.asmx/GetHome";
-                    //$(".display").html("");
-
-                    var mlsNum = parseInt($("#txtMLS").val());
-                    var inputParametersObject = new Object();
-                    inputParametersObject.mlsNum = mlsNum;
-                    var strInput = JSON.stringify(inputParametersObject);
-
-                    $.ajax({
-
-                        type: "POST",
-                        url: strURL,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: strInput,
-                        success: function (data) {
-                            alert("here");
-                            var home = data.d;
-                            $(".display").html("<br><br>" +
-                                            "Home: <br>" +
-                                            home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
-                                            "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                                            "Bath: " + home.bath +
-                                            "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                                            "Size: " + home.size +
-                                            "<br>Status: " + home.status +
-                                            "<br><br>Description:<br>" + home.description + "<br><br>" +
-                                            " <img src='" + home.url + "'/>");
-                        },
-                        error: function (req, status, error) {
-                            alert("Error: " + req.responseText + " | " + status + " | " + error);
-                        }
-                    });//end AJAX                });
-
-
-            });
-
-
-            $("#btnSearchByPrice").click(function(){
-                alert("top");
-                var strURL = "homeSvc.asmx/GetHomeByMaxPrice";    // URL of the Web Service followed by the name of the Web Method.
-
-                // Clear the divs contents.
-                $(".display").html("");
-
-                alert("here");
-                var maxPrice = parseFloat($("#txtMaxPrice").val()).toFixed(2);
-            
-
-
-                var inputParametersObject = new Object();
-                inputParametersObject.price = maxPrice;           // the property 'price' is the name or the parameter expected by the Web Method.
-
-                var strInput = JSON.stringify(inputParametersObject);
-                //var strInput = JSON.stringify({theTeam:team}); //alternative method - doesn't require creating the object to store the parameter.
-
-                // Make an AJAX request to get a team and display the response in the appropriate div.
                 $.ajax({
                     type: "POST",
                     url: strURL,
-                    contentType: "application/json; charset=utf-8", // set the data type sent to the Web Service.
-                    dataType: "json",                               // set the data type expected from the Web Service.                               
-                    data: strInput,                                 // send an empty JSON object (no input required).    
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: strInput,
                     success: function (data) {
-                     //  alert("data = " + maxPrice);
-                        
-                        // set callback function used to update the page/                  
-                        var homes = data.d;
-                        $.each(homes, function (index, home) {
-                            $(".display").append("<p>".concat("MLS#: ", home.mls,
-                                                              "<br>Address: ", home.address, "<br>", home.city, ", ", home.state, " ", home.zipcode,
-                                                              "<br>Bed: ", home.bed, "  Bath: ", home.bath, "  Size: ", home.size, " sqft",
-                                                              "<br>Price: $ ", home.price,
-                                                              "<br>Status: ", home.status,
-                                                              "<br>Description: ", home.description,
-                                                              "<br>Image: <a href='",home.url,"'>Link</a>", 
-                                                              "</p>"));
-                        });
+                        var home = data.d;
+                        alert("data: " + home.address);
+                        $(".display").html("<br><br>" +
+                                        "Home: <br>" +
+                                        home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
+                                        "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                        "Bath: " + home.bath +
+                                        "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                        "Size: " + home.size +
+                                        "<br>Status: " + home.status +
+                                        "<br><br>Description:<br>" + home.description + "<br><br>" +
+                                        " <img src='" + home.url + "'/>");
                     },
-                    error: function (req, status, error) {          // sets the error callback function used when an error occurs.
+                    error: function (req, status, error) {
                         alert("Error: " + req.responseText + " | " + status + " | " + error);
                     }
-                }); //end of ajax method
-            }); // end of btn click event
+                });//end AJAX
+            });
 
 
-           
+            $("#btnSearchMLS").click(function () {
+                var strURL = "homeSvc.asmx/GetHome";
+                $(".display").html("");
+
+                var mlsNum = parseInt($("#txtMLS").val());
+                var inputParametersObject = new Object();
+                inputParametersObject.mlsNum = mlsNum;
+                var strInput = JSON.stringify(inputParametersObject);
+
+                $.ajax({
+
+                    type: "POST",
+                    url: strURL,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: strInput,
+                    success: function (data) {
+                        //    alert("here");
+                        var home = data.d;
+                        $(".display").html("<br><br>" +" <img src='" + home.url + "'/>"+
+                                        "<br> Home: <br>" +
+                                        home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
+                                        "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                        "Bath: " + home.bath +
+                                        "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                        "Size: " + home.size +
+                                        "<br>Status: " + home.status +
+                                        "<br><br>Description:<br>" + home.description + "<br><br>" 
+                                        );
+                    },
+                    error: function (req, status, error) {
+                        alert("Error: " + req.responseText + " | " + status + " | " + error);
+                    }
+                });//end AJAX
+            });
+
 
 
         });
+
+
+        $("#btnSearchByPrice").click(function () {
+            alert("top");
+            var strURL = "homeSvc.asmx/GetHomeByMaxPrice";    // URL of the Web Service followed by the name of the Web Method.
+
+            // Clear the divs contents.
+            $(".display").html("");
+            $(".txtMaxPrice").html("");
+
+
+            // alert("here");
+            var maxPrice = parseFloat($("#txtMaxPrice").val()).toFixed(2);
+
+
+
+            var inputParametersObject = new Object();
+            inputParametersObject.price = maxPrice;           // the property 'price' is the name or the parameter expected by the Web Method.
+
+            var strInput = JSON.stringify(inputParametersObject);
+            //var strInput = JSON.stringify({theTeam:team}); //alternative method - doesn't require creating the object to store the parameter.
+
+            // Make an AJAX request to get a team and display the response in the appropriate div.
+            $.ajax({
+                type: "POST",
+                url: strURL,
+                contentType: "application/json; charset=utf-8", // set the data type sent to the Web Service.
+                dataType: "json",                               // set the data type expected from the Web Service.                               
+                data: strInput,                                 // send an empty JSON object (no input required).    
+                success: function (data) {
+                    //  alert("data = " + maxPrice);
+
+                    // set callback function used to update the page/                  
+                    var homes = data.d;
+                    $.each(homes, function (index, home) {
+                        $(".display").append("<p>".concat("<img src='" + home.url + "'/>",
+                                                          "<br><br>MLS#: ", home.mls,
+                                                          "<br>Address: ", home.address, "<br>", home.city, ", ", home.state, " ", home.zipcode,
+                                                          "<br>Bed: ", home.bed, "    |  Bath: ", home.bath, " | Size: ", home.size, " sqft",
+                                                          "<br>Price: $ ", home.price,
+                                                          "<br>Status: ", home.status,
+                                                          "<br><br>Description: <br> ", home.description,
+                                                          "</p>"));
+                    });
+                },
+                error: function (req, status, error) {          // sets the error callback function used when an error occurs.
+                    alert("Error: " + req.responseText + " | " + status + " | " + error);
+                }
+            }); //end of ajax method
+        }); // end of btn click event
+
+        $("#btnSearchByBedAndBath").click(function () {
+            var strURL = "homeSvc.asmx/GetHomeByBedAndBath";
+            $(".display").html("");
+
+            var numBed = parseInt($("#txtNumBed").val());
+            var numBath = parseInt($("#txtNumBath").val());
+            //$(".txtNumBed").val("");
+            //$(".txtNumBath").val("");
+            var strInput = JSON.stringify({ bed: numBed, bath: numBath });
+
+            $.ajax({
+                type: "POST",
+                url: strURL,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: strInput,
+                success: function (data) {
+
+                    // set callback function used to update the page/                  
+                    var homes = data.d;
+
+                    $.each(homes, function (index, home) {
+                        $(".display").append("<p>".concat("<img src='" + home.url + "'/>",
+                                                          "<br><br>MLS#: ", home.mls,
+                                                          "<br>Address: ", home.address, "<br>", home.city, ", ", home.state, " ", home.zipcode,
+                                                          "<br>Bed: ", home.bed, " | Bath: ", home.bath, " | Size: ", home.size, " sqft",
+                                                          "<br>Price: $ ", home.price,
+                                                          "<br>Status: ", home.status,
+                                                          "<br><br>Description: <br> ", home.description,
+                                                          "</p>"));
+                    });
+                },
+                error: function (req, status, error) {
+                    alert("Error: " + req.responseText + " | " + status + " | " + error);
+                }
+            });//end AJAX
+        });
+
+
+
+
+
     </script>
 
 
