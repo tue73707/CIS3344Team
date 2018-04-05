@@ -27,11 +27,11 @@ namespace CIS3344TeamProject
         // This method receives a maximum price of a home and returns a Home object with the field values from the database.
         // This method returns an ArrayList of Home objects that represents all the home with a given max price.
         [WebMethod]
-        public List<Home> GetHomeByMaxPrice(int price)
+        public List<Home> GetHomeByMaxPrice(Decimal price)
         {
             List<Home> homeList = new List<Home>();
-            DBConnect objDB = new DBConnect();
-            String strSQL = "SELECT * FROM Home WHERE Price <='" + price + "'";
+           // DBConnect objDB = new DBConnect();
+            String strSQL = "SELECT * FROM Home WHERE Price <= " + price;
             int count = 0;
 
             objDB.GetDataSet(strSQL, out count);
@@ -46,7 +46,7 @@ namespace CIS3344TeamProject
                 objHome.zipcode = objDB.GetField("ZipCode", i).ToString();
                 objHome.bed = (int)objDB.GetField("Bed", i);
                 objHome.bath = (int)objDB.GetField("Bath", i);
-                objHome.price = (int)objDB.GetField("Price", i);
+                objHome.price = (Decimal)objDB.GetField("Price", i);
                 objHome.size = (int)objDB.GetField("Size", i);
                 objHome.status = objDB.GetField("Status", i).ToString();
                 objHome.description = objDB.GetField("Description", i).ToString();
@@ -67,8 +67,8 @@ namespace CIS3344TeamProject
         public List<Home> GetHomeByBedAndBath(int bed, int bath)
         {
             List<Home> homeList = new List<Home>();
-            DBConnect objDB = new DBConnect();
-            String strSQL = "SELECT * FROM Home WHERE Bed ='" + bed + "', Bath ='" + bath +"'";
+           // DBConnect objDB = new DBConnect();
+            String strSQL = "SELECT * FROM Home WHERE Bed =" + bed + ",Bath =" + bath;
             int count = 0;
 
             objDB.GetDataSet(strSQL, out count);

@@ -28,6 +28,7 @@
 
     <div class="display"></div>
 
+<!--    <center>
         <table>
         <tr>
             <td>Price: </td>
@@ -39,7 +40,8 @@
                 <input id="btnSearchByPrice" value="Search By Price" type="button" />
             </td>
         </tr>
-    </table>
+    </table>
+</center-->
 
     <br /><br /><br />
 
@@ -75,21 +77,40 @@
                     );
             });
 
+            $("#btnSearch").click(function () {
+
+                // Clear the divs contents.
+                $(".display").html("");
+
+                $(".display").html("Maximum Price: $" + "<input id='txtMaxPrice' type='text' />" + "<br /><br />" +
+               
+                    "<input id='btnSearchByPrice' type='button' value='Search' />" + "<hr>" +
+                    
+                    "Bed: #" + "<input id='txtNumBed' type='text' />" +"       Bath: # " + "<input id='txtNumBath' type='text' />" + "<br /><br />"+
+
+                    "<input id='btnSearchByBedAndBath' type='button' value='Search' />"
+
+
+
+
+
+                    );
+            });
 
 
             $("#btnSearchByPrice").click(function () {
                 var strURL = "homeSvc.asmx/GetHomeByMaxPrice";    // URL of the Web Service followed by the name of the Web Method.
 
                 // Clear the divs contents.
-                $("#display").html("");
+                $(".display").html("");
 
-     
-                 var maxPrice = $("#txtMaxPrice").val();
+                alert("here");
+                var maxPrice = parseFloat($("#txtMaxPrice").val()).toFixed(2);
             
 
 
                 var inputParametersObject = new Object();
-                inputParametersObject.price = maxPrice;           // the property 'theTeam' is the name or the parameter expected by the Web Method.
+                inputParametersObject.price = maxPrice;           // the property 'price' is the name or the parameter expected by the Web Method.
 
                 var strInput = JSON.stringify(inputParametersObject);
                 //var strInput = JSON.stringify({theTeam:team}); //alternative method - doesn't require creating the object to store the parameter.
@@ -101,13 +122,16 @@
                     contentType: "application/json; charset=utf-8", // set the data type sent to the Web Service.
                     dataType: "json",                               // set the data type expected from the Web Service.                               
                     data: strInput,                                 // send an empty JSON object (no input required).    
-                    success: function (data) {                      // set callback function used to update the page/                  
+                    success: function (data) {
+                     //  alert("data = " + maxPrice);
+                        
+                        // set callback function used to update the page/                  
                         var homes = data.d;
                         $.each(homes, function (index, home) {
-                            $("#display").append("<p>".concat("MLS#: ", home.mls,
+                            $(".display").append("<p>".concat("MLS#: ", home.mls,
                                                               "<br>Address: ", home.address, "<br>", home.city, ", ", home.state, " ", home.zipcode,
-                                                              "<br>Bed: ", home.bed, "  Bath: ", home.bath, "  Size: ", home.size, "sqft",
-                                                              "<br>Price: ", home.price,
+                                                              "<br>Bed: ", home.bed, "  Bath: ", home.bath, "  Size: ", home.size, " sqft",
+                                                              "<br>Price: $ ", home.price,
                                                               "<br>Status: ", home.status,
                                                               "<br>Description: ", home.description,
                                                               "<br>Image: <a href='",home.url,"'>Link</a>", 
@@ -116,8 +140,11 @@
                     },
                     error: function (req, status, error) {          // sets the error callback function used when an error occurs.
                         alert("Error: " + req.responseText + " | " + status + " | " + error);
-                    }                }); //end of ajax method
-            }); // end of btnStoreTeam click event
+                    }
+                }); //end of ajax method
+            }); // end of btn click event
+
+
            
 
 

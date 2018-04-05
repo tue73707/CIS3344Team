@@ -14,7 +14,7 @@ namespace CIS3344TeamProject
         public string zipcode { get; set; }
         public int bed { get; set; }
         public int bath { get; set; }
-        public int price { get; set; }
+        public decimal price { get; set; }
         public int size { get; set; }
         public string status { get; set; }
         public string description { get; set; }
