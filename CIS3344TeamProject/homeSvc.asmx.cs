@@ -153,14 +153,16 @@ namespace CIS3344TeamProject
         [WebMethod]
         public Home UpdateStatus(int mlsNum, string status)
         {
-            DBConnect objDB = new DBConnect();
+            //DBConnect objDB = new DBConnect();
             Home home = new Home();
+            
+            string strSQL = "UPDATE Home SET Status='" + status + "' WHERE MLS='" + mlsNum + "'";
+            objDB.GetDataSet(strSQL);
 
-            //string strSQL = "SELECT Address, City, State, ZipCode, Bed, Bath, Price, Size, Status, Description, URL FROM Home WHERE MLS=" + mlsNum;
-            string strSQL = "UPDATE Home SET status='" + status + "' WHERE MLS=" + mlsNum;
+            string strSQL1 = "SELECT * FROM Home WHERE MLS=" + mlsNum;
             int count = 0;
+            objDB.GetDataSet(strSQL1, out count);
 
-            objDB.GetDataSet(strSQL, out count);
 
             if (count > 0)
             {
@@ -171,7 +173,7 @@ namespace CIS3344TeamProject
                 home.zipcode = objDB.GetField("ZipCode", 0).ToString();
                 home.bed = Convert.ToInt32(objDB.GetField("Bed", 0).ToString());
                 home.bath = Convert.ToInt32(objDB.GetField("Bath", 0).ToString());
-                home.price = Convert.ToInt32(objDB.GetField("Price", 0).ToString());
+                home.price = Convert.ToDecimal(objDB.GetField("Price", 0).ToString());
                 home.size = Convert.ToInt32(objDB.GetField("Size", 0).ToString());
                 home.status = objDB.GetField("Status", 0).ToString();
                 home.description = objDB.GetField("Description", 0).ToString();
