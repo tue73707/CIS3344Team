@@ -39,10 +39,10 @@
 
                 // Clear the divs contents.
                 $(".display").html("");
-                $(".display").html("Street Address: " + "<input id='txtAddress' type='text' />" + "<br /><br />" +
+                $(".display").html("Street Address: " + "<input id='txtStreet' type='text' />" + "<br /><br />" +
                     "City: " + "<input id='txtCity' type='text' />" + "<br /><br />" +
                     "State: " + "<input id='txtState' type='text' />" + "<br /><br />" +
-                    "Zip Code: " + "<input id='txtZipCode' type='text' />" + "<br /><br />" +
+                    "Zip Code: " + "<input id='txtZip' type='text' />" + "<br /><br />" +
 
                     "Number of bed: " + "<input id='txtBed' type='text' />" + "<br /><br />" +
                     "Number of bath: " + "<input id='txtBath' type='text' />" + "<br /><br />" +
@@ -64,7 +64,7 @@
                     //$(".display").html("");
 
                     var home = new Object();
-                    home.Address = $("#txtAddress").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.ZipCode = $("#txtZipCode").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#txtStatus").val();                    home.Description = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                                        //AJAX                    $.ajax({
+                    home.Address = $("#txtStreet").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.ZipCode = $("#txtZip").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#txtStatus").val();                    home.Description = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                                        //AJAX                    $.ajax({
                         type: "POST",
                         url: strURL,
                         contentType: "application/json; charset=utf-8",
@@ -94,8 +94,57 @@
                 // Clear the divs contents.
                 //$(".display").html("");
                 $(".display").html("MLS: " + "<input id='txtMLS' type='text' />" + "<br /><br />" +
+
+                    "Status: " + "<input id='txtUpdateStatus' type='text' />" + "<br /><br />" +
+                    "<input id='btnUpdateStatus' type='submit' value='Update Status' />" + 
+
                     "<input id='btnSearchMLS' type='submit' value='Search For MLS' />");
                 
+
+
+
+
+                $("#btnUpdateStatus").click(function () {
+                    var strURL = "homeSvc.asmx/UpdateStatus";
+                    //$(".display").html("");
+
+                    var mlsNum = parseInt($("#txtMLS").val());
+                    var status = $("#txtUpdateStatus").val();
+                    var inputParametersObject = new Object();
+                    inputParametersObject.mlsNum = mlsNum;
+                    inputParametersObject.status = status;
+                    var strInput = JSON.stringify(inputParametersObject);
+
+                    $.ajax({
+                        type: "POST",
+                        url: strURL,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: strInput,
+                        success: function (data) {
+                            alert("update here");
+                            var home = data.d;
+                            $(".display").html("<br><br>" +
+                                            "Home: <br>" +
+                                            home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
+                                            "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                            "Bath: " + home.bath +
+                                            "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                            "Size: " + home.size +
+                                            "<br>Status: " + home.status +
+                                            "<br><br>Description:<br>" + home.description + "<br><br>" +
+                                            " <img src='" + home.url + "'/>");
+                        },
+                        error: function (req, status, error) {
+                            alert("Error: " + req.responseText + " | " + status + " | " + error);
+                        }
+                    });//end AJAX                });//end search MLS
+
+
+
+
+
+
                 $("#btnSearchMLS").click(function () {
                     var strURL = "homeSvc.asmx/GetHome";
                     //$(".display").html("");
