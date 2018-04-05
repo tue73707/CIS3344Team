@@ -49,10 +49,11 @@
                     "Price: " + "<input id='txtPrice' type='text' />" + "<br /><br />" +
                     "Sq ft: " + "<input id='txtSize' type='text' />" + "<br /><br />" +
 
-                    "Status: " + "<input id='status' type='text' />" + "<br /><br />" +
+                    "Status: " + "<input id='txtStatus' type='text' />" + "<br /><br />" +
                     //"Status: " + "<select id='status'>" + "<option>Active</option><option>Processing</option>" +
                     //"</select>" + "<br /><br />" +
 
+                    //"Description: " + "<input id='txtDescription' type='text' />" + "<br /><br />" +
                     "Description: " + "<textarea id='txtDescription' cols='30' rows='3'></textarea>" + "<br /><br />" +
                     "Image URL: " + "<input id='txtURL' type='text' />" + "<br /><br />" +
 
@@ -63,7 +64,7 @@
                     //$(".display").html("");
 
                     var home = new Object();
-                    home.Address = $("#txtAddress").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.Zip = $("#txtZipCode").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#status").val();                    home.Des = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                                        //AJAX                    $.ajax({
+                    home.Address = $("#txtAddress").val();                    home.City = $("#txtCity").val();                    home.State = $("#txtState").val();                    home.ZipCode = $("#txtZipCode").val();                    home.Bed = $("#txtBed").val();                    home.Bath = $("#txtBath").val();                    home.Price = $("#txtPrice").val();                    home.Size = $("#txtSize").val();                    //$('#aioConceptName').find(":selected").text();                    //home.Status = $("#status").find(":selected").text();                    home.Status = $("#txtStatus").val();                    home.Description = $("#txtDescription").val();                    home.URL = $("#txtURL").val();                    var inputParametersObject = new Object();                    inputParametersObject.home = home;                    var strInput = JSON.stringify(inputParametersObject);                                        //AJAX                    $.ajax({
                         type: "POST",
                         url: strURL,
                         contentType: "application/json; charset=utf-8",
@@ -72,7 +73,7 @@
                         success: function (data) {
                             alert("Got here!");
                             var result = data.d;
-                            if (result == "true") {
+                            if (result = 1) {
                                 $(".display").text("The home was successfully added to the database.");
                             }
                             else {
@@ -85,6 +86,58 @@
                     });//end AJAX
                 });//end add home
             });//end display add
+
+
+
+            $("#btnSearch").click(function () {
+
+                // Clear the divs contents.
+                //$(".display").html("");
+                $(".display").html("MLS: " + "<input id='txtMLS' type='text' />" + "<br /><br />" +
+                    "<input id='btnSearchMLS' type='submit' value='Search For MLS' />");
+                
+                $("#btnSearchMLS").click(function () {
+                    var strURL = "homeSvc.asmx/GetHome";
+                    //$(".display").html("");
+
+                    var mlsNum = parseInt($("#txtMLS").val());
+                    var inputParametersObject = new Object();
+                    inputParametersObject.mlsNum = mlsNum;
+                    var strInput = JSON.stringify(inputParametersObject);
+
+                    $.ajax({
+
+                        type: "POST",
+                        url: strURL,
+                        contentType: "application/json; charset=utf-8", 
+                        dataType: "json",
+                        data: strInput,
+                        success: function (data) {
+                            alert("here");
+                            var home = data.d;
+                            $(".display").html("<br><br>" +
+                                            "Home: <br>" +
+                                            home.address + " " + home.city + ", " + home.state + " " + home.zipcode +
+                                            "<br>Bed: " + home.bed + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                            "Bath: " + home.bath +
+                                            "<br>Price: $" + home.price + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                            "Size: " + home.size +
+                                            "<br>Status: " + home.status +
+                                            "<br><br>Description:<br>" + home.description + "<br><br>" + 
+                                            " <img src='" + home.url + "'/>");
+                        },
+                        error: function (req, status, error) {
+                            alert("Error: " + req.responseText + " | " + status + " | " + error);
+                        }                    });//end AJAX                });//end search MLS
+            });//end display search
+
+           
+
+
+
+
+
+
 
 
 

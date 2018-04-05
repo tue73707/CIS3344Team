@@ -126,21 +126,22 @@ namespace CIS3344TeamProject
             DBConnect objDB = new DBConnect();
             Home home = new Home();
 
-            string strSQL = "SELECT * FROM Home WHERE MLS = '" + mlsNum + "'";
+            //string strSQL = "SELECT Address, City, State, ZipCode, Bed, Bath, Price, Size, Status, Description, URL FROM Home WHERE MLS=" + mlsNum;
+            string strSQL = "SELECT * FROM Home WHERE MLS=" + mlsNum;
+            int count = 0;
 
-            int recordCount = 0;
+            objDB.GetDataSet(strSQL, out count);
 
-            objDB.GetDataSet(strSQL, out recordCount);
-
-            if (recordCount > 0)
+            if (count > 0)
             {
+                //home.mls = Convert.ToInt32(objDB.GetField("MLS", 0).ToString());
                 home.address = objDB.GetField("Address", 0).ToString();
                 home.city = objDB.GetField("City", 0).ToString();
                 home.state = objDB.GetField("State", 0).ToString();
                 home.zipcode = objDB.GetField("ZipCode", 0).ToString();
                 home.bed = Convert.ToInt32(objDB.GetField("Bed", 0).ToString());
                 home.bath = Convert.ToInt32(objDB.GetField("Bath", 0).ToString());
-                home.price = Convert.ToInt32(objDB.GetField("Price", 0).ToString());
+                home.price = Convert.ToDecimal(objDB.GetField("Price", 0).ToString());
                 home.size = Convert.ToInt32(objDB.GetField("Size", 0).ToString());
                 home.status = objDB.GetField("Status", 0).ToString();
                 home.description = objDB.GetField("Description", 0).ToString();
