@@ -34,7 +34,7 @@ h1{
 }
 
 #btnAdd{
-    margin-left:40%;
+    margin-left:10%;
     background-color:white;
     border-style:solid;
     border-color:cadetblue;
@@ -59,10 +59,19 @@ h1{
 .display{
     margin-top:5%;
     font-size:20px;
-    margin-left:30%;
+    margin-left:10%;
+margin-right:10%;
 
 }
+#displaySearch{
 
+     margin-top:5%;
+    font-size:20px;
+    margin-left:10%;
+     
+
+
+}
 /*  --- elements inside div ---  */
 input{
     height:25px;

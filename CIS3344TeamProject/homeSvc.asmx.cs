@@ -68,7 +68,7 @@ namespace CIS3344TeamProject
         {
             List<Home> homeList = new List<Home>();
            // DBConnect objDB = new DBConnect();
-            String strSQL = "SELECT * FROM Home WHERE Bed =" + bed + ",Bath =" + bath;
+            String strSQL = "SELECT * FROM Home WHERE Bed =" + bed + " AND Bath =" + bath;
             int count = 0;
 
             objDB.GetDataSet(strSQL, out count);
@@ -83,7 +83,7 @@ namespace CIS3344TeamProject
                 objHome.zipcode = objDB.GetField("ZipCode", i).ToString();
                 objHome.bed = (int)objDB.GetField("Bed", i);
                 objHome.bath = (int)objDB.GetField("Bath", i);
-                objHome.price = (int)objDB.GetField("Price", i);
+                objHome.price = (Decimal)objDB.GetField("Price", i);
                 objHome.size = (int)objDB.GetField("Size", i);
                 objHome.status = objDB.GetField("Status", i).ToString();
                 objHome.description = objDB.GetField("Description", i).ToString();
